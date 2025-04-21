@@ -5,9 +5,9 @@ Date: 2025-04-20
 Title: EDMeta: Editorial Metadata Shortform Specification
 Description: A compact, machine- and human-readable string format for denoting authorship origin, editorial checks, and licensing on written or media content. It aims to improve transparency, support ethical content sourcing, and enable automated processing or filtering in both human-facing and federated systems.
 Tags: EDMeta, Editorial Metadata, Specification, Transparency, Content Creation, Licensing
+Version: 1.0
+Status: Draft
 ---
-
-# EDMeta: Editorial Metadata Shortform Specification
 
 ## Summary
 
@@ -101,7 +101,7 @@ ED:AI0+H-ED:GrCtMd:CC-NC-SA
 
 ## Expanded Use
 
-**JSON-LD Mapping**
+### JSON-LD Mapping
 
 For structured data, map to JSON-LD:
 
@@ -125,7 +125,8 @@ For structured data, map to JSON-LD:
 }
 ```
 
-**Fediverse Integration**
+### Fediverse Integration
+
 Display in footers of posts as:
 
 ```text
