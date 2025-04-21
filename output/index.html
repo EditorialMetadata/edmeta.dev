@@ -11,8 +11,8 @@
     <button id="absolute-mode-toggle" class="btn btn-secondary" style="position: absolute; top: 10px; right: 10px; z-index: 1000;">Toggle Mode</button>
 
     <div class="container content">
+      <h1>EDMeta: Editorial Metadata Shortform Specification</h1>
 <!-- Content Start -->
-<h1>EDMeta: Editorial Metadata Shortform Specification</h1>
 <h2>Summary</h2>
 <p>EDMeta is a compact, machine- and human-readable string format for denoting authorship origin, editorial checks, and licensing on written or media content. It aims to improve transparency, support ethical content sourcing, and enable automated processing or filtering in both human-facing and federated systems.</p>
 <h2>Goals</h2>
@@ -167,7 +167,7 @@
 </blockquote>
 <hr />
 <h2>Expanded Use</h2>
-<p><strong>JSON-LD Mapping</strong></p>
+<h3>JSON-LD Mapping</h3>
 <p>For structured data, map to JSON-LD:</p>
 <pre><code class="language-json">{
   &quot;@context&quot;: &quot;https://schema.org&quot;,
@@ -185,8 +185,8 @@
   &quot;license&quot;: &quot;CC Attribution NonCommercial ShareAlike&quot;
 }
 </code></pre>
-<p><strong>Fediverse Integration</strong>
-Display in footers of posts as:</p>
+<h3>Fediverse Integration</h3>
+<p>Display in footers of posts as:</p>
 <pre><code class="language-text">ED:AI2:SpGr:CC-BY
 </code></pre>
 <p>Parsed by clients into readable tooltip or metadata badge.</p>
