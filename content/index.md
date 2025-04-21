@@ -96,33 +96,34 @@ ED:AI0+H-ED:GrCtMd:CC-NC-SA
 
   For structured data, map to JSON-LD:
 
-  ```json
-  {
-    "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    "authoringOrigin": "human-authored",
-    "editorialChecks": ["spell-checked", "style-checked", "fact-checked"],
-    "license": "CC Attribution"
-  }
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "authoringOrigin": "human-authored",
+  "editorialChecks": ["spell-checked", "style-checked", "fact-checked"],
+  "license": "CC Attribution"
+}
+```
 
-  ```json
-  {
-    "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    "authoringOrigin": "ai-generated+human-edited",
-    "editorialChecks": ["grammar-checked", "sources cited", "moderated"],
-    "license": "CC Attribution NonCommercial ShareAlike"
-  }
-  ```
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "authoringOrigin": "ai-generated+human-edited",
+  "editorialChecks": ["grammar-checked", "sources cited", "moderated"],
+  "license": "CC Attribution NonCommercial ShareAlike"
+}
+```
 
 - **Fediverse Integration**
   Display in footers of posts as:
 
-  ```text
-  ED:AI2:SpGr:CC-BY
-  ```
+```text
+ED:AI2:SpGr:CC-BY
+```
 
-  Parsed by clients into readable tooltip or metadata badge.
+Parsed by clients into readable tooltip or metadata badge.
 
 ---
 

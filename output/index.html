@@ -171,28 +171,31 @@
 <li><strong>JSON-LD Mapping</strong></li>
 </ul>
 <p>For structured data, map to JSON-LD:</p>
-<p>```json
-  {
-    "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    "authoringOrigin": "human-authored",
-    "editorialChecks": ["spell-checked", "style-checked", "fact-checked"],
-    "license": "CC Attribution"
-  }</p>
-<p><code>json
-  {
-    "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    "authoringOrigin": "ai-generated+human-edited",
-    "editorialChecks": ["grammar-checked", "sources cited", "moderated"],
-    "license": "CC Attribution NonCommercial ShareAlike"
-  }</code></p>
+<pre class="codehilite"><code class="language-json">{
+  &quot;@context&quot;: &quot;https://schema.org&quot;,
+  &quot;@type&quot;: &quot;CreativeWork&quot;,
+  &quot;authoringOrigin&quot;: &quot;human-authored&quot;,
+  &quot;editorialChecks&quot;: [&quot;spell-checked&quot;, &quot;style-checked&quot;, &quot;fact-checked&quot;],
+  &quot;license&quot;: &quot;CC Attribution&quot;
+}
+</code></pre>
+
+<pre class="codehilite"><code class="language-json">{
+  &quot;@context&quot;: &quot;https://schema.org&quot;,
+  &quot;@type&quot;: &quot;CreativeWork&quot;,
+  &quot;authoringOrigin&quot;: &quot;ai-generated+human-edited&quot;,
+  &quot;editorialChecks&quot;: [&quot;grammar-checked&quot;, &quot;sources cited&quot;, &quot;moderated&quot;],
+  &quot;license&quot;: &quot;CC Attribution NonCommercial ShareAlike&quot;
+}
+</code></pre>
+
 <ul>
 <li><strong>Fediverse Integration</strong>
   Display in footers of posts as:</li>
 </ul>
-<p><code>text
-  ED:AI2:SpGr:CC-BY</code></p>
+<pre class="codehilite"><code class="language-text">ED:AI2:SpGr:CC-BY
+</code></pre>
+
 <p>Parsed by clients into readable tooltip or metadata badge.</p>
 <hr />
 <h2 id="roadmap">Roadmap</h2>
