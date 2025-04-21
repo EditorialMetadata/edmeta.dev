@@ -1,5 +1,5 @@
 ---
-ED: "ED:AI3+H-ED:SpGrStFt:CC-BY"
+ED: ED:AI3+H-ED:SpGrStFt:CC-BY
 Author: Mike Preston
 Date: 2025-04-20
 Title: EDMeta: Editorial Metadata Shortform Specification

@@ -19,16 +19,48 @@ def render_markdown_to_html(markdown_files, template_path, output_path):
         with open(markdown_filepath, 'r') as f:
             markdown_content = f.read()
 
-        # Remove the front matter if present
+        # Remove and parse the front matter if present - this is a common pattern in markdown files
+        # that use YAML front matter (e.g., Jekyll, Hugo)
+        # This assumes the front matter is enclosed in triple dashes (---)
+        # and is at the beginning of the file.
         if markdown_content.startswith('---'):
-            end_of_front_matter = markdown_content.find('---', 3) + 3
-            markdown_content = markdown_content[end_of_front_matter:].strip()
+            end_of_front_matter = markdown_content.find('---', 3)
+            if end_of_front_matter != -1:
+                front_matter = markdown_content[3:end_of_front_matter].strip()
+                markdown_content = markdown_content[end_of_front_matter + 3:].strip()
+            else:
+                front_matter = None
+        else:
+            front_matter = None
+
+        # Extract title from front matter if available
+        title = None
+        if front_matter:
+            for line in front_matter.splitlines():
+                if line.lower().startswith('title:'):
+                    title = line.split(':', 1)[1].strip()
+                    break
+        if title is None:
+            # Fallback to the filename without extension if no title is found
+            title = os.path.splitext(os.path.basename(markdown_filepath))[0].replace('_', ' ').title()
+        # Add title to the context for rendering
+        context = {
+            'title': title,
+            'content': markdown_content,
+        }
 
         # Enable common markdown extensions including tables and fenced code blocks
-        html_content = markdown.markdown(markdown_content, extensions=['tables', 'fenced_code', 'codehilite', 'toc'])
+        html_content = markdown.markdown(markdown_content, extensions=['extra', 'smarty', 'tables', 'fenced_code'])
+        # Add the HTML content to the context
+        context['content'] = html_content
+        # Add the front matter to the context if available
+        if front_matter:
+            context['front_matter'] = front_matter
 
-        # Render the HTML content using the Jinja template
-        rendered_html = template.render(content=html_content)
+        # Debug: dump the context to see what is being passed to the template
+        # print(context)
+
+        rendered_html = template.render(content=html_content, title=title, front_matter=front_matter)
 
         with open(os.path.join(output_path, output_filename), 'w') as f:
             f.write(rendered_html)

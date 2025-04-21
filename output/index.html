@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap Page with Light/Dark Mode</title>
+    <title>EDMeta: Editorial Metadata Shortform Specification</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1 id="edmeta-editorial-metadata-shortform-specification">EDMeta: Editorial Metadata Shortform Specification</h1>
-<h2 id="summary">Summary</h2>
+    <button id="absolute-mode-toggle" class="btn btn-secondary" style="position: absolute; top: 10px; right: 10px; z-index: 1000;">Toggle Mode</button>
+
+    <div class="container content">
+<!-- Content Start -->
+<h1>EDMeta: Editorial Metadata Shortform Specification</h1>
+<h2>Summary</h2>
 <p>EDMeta is a compact, machine- and human-readable string format for denoting authorship origin, editorial checks, and licensing on written or media content. It aims to improve transparency, support ethical content sourcing, and enable automated processing or filtering in both human-facing and federated systems.</p>
-<h2 id="goals">Goals</h2>
+<h2>Goals</h2>
 <ul>
 <li><strong>Transparency</strong>: Show clearly how a piece of content was created, verified, and licensed.</li>
 <li><strong>Compactness</strong>: Fit easily in signatures, footers, posts, and metadata headers.</li>
@@ -20,12 +23,11 @@
 <li><strong>Extensibility</strong>: Allow for future categories or domain-specific extensions.</li>
 </ul>
 <hr />
-<h2 id="syntax">Syntax</h2>
-<pre class="codehilite"><code class="language-text">ED:&lt;origin&gt;:&lt;checks&gt;:&lt;license&gt;
+<h2>Syntax</h2>
+<pre><code class="language-text">ED:&lt;origin&gt;:&lt;checks&gt;:&lt;license&gt;
 </code></pre>
-
 <p>All segments use shortcodes for compact representation.</p>
-<h3 id="origin">Origin</h3>
+<h3>Origin</h3>
 <p>Describes the creation process:</p>
 <table>
 <thead>
@@ -67,7 +69,7 @@
 <li><code>AI2</code> → human-led, AI-assisted</li>
 <li><code>AI0+H-ED</code> → AI-generated, then human-edited</li>
 </ul>
-<h3 id="checks">Checks</h3>
+<h3>Checks</h3>
 <p>Editorial and quality checks applied, expressed as 2-letter codes:</p>
 <table>
 <thead>
@@ -119,7 +121,7 @@
 <ul>
 <li><code>SpGrStFt</code> = spell, grammar, style, fact checks</li>
 </ul>
-<h3 id="license">License</h3>
+<h3>License</h3>
 <p>Use established short forms:</p>
 <table>
 <thead>
@@ -152,24 +154,22 @@
 </tbody>
 </table>
 <hr />
-<h2 id="examples">Examples</h2>
-<pre class="codehilite"><code class="language-text">ED:H:SpStFt:CC-BY
+<h2>Examples</h2>
+<pre><code class="language-text">ED:H:SpStFt:CC-BY
 </code></pre>
-
 <blockquote>
 <p>Human-authored, spell/style/fact-checked, Creative Commons Attribution</p>
 </blockquote>
-<pre class="codehilite"><code class="language-text">ED:AI0+H-ED:GrCtMd:CC-NC-SA
+<pre><code class="language-text">ED:AI0+H-ED:GrCtMd:CC-NC-SA
 </code></pre>
-
 <blockquote>
 <p>AI-generated, human-edited, grammar/citation/moderation checked, Creative Commons NonCommercial ShareAlike</p>
 </blockquote>
 <hr />
-<h2 id="expanded-use">Expanded Use</h2>
+<h2>Expanded Use</h2>
 <p><strong>JSON-LD Mapping</strong></p>
 <p>For structured data, map to JSON-LD:</p>
-<pre class="codehilite"><code class="language-json">{
+<pre><code class="language-json">{
   &quot;@context&quot;: &quot;https://schema.org&quot;,
   &quot;@type&quot;: &quot;CreativeWork&quot;,
   &quot;authoringOrigin&quot;: &quot;human-authored&quot;,
@@ -177,8 +177,7 @@
   &quot;license&quot;: &quot;CC Attribution&quot;
 }
 </code></pre>
-
-<pre class="codehilite"><code class="language-json">{
+<pre><code class="language-json">{
   &quot;@context&quot;: &quot;https://schema.org&quot;,
   &quot;@type&quot;: &quot;CreativeWork&quot;,
   &quot;authoringOrigin&quot;: &quot;ai-generated+human-edited&quot;,
@@ -186,15 +185,13 @@
   &quot;license&quot;: &quot;CC Attribution NonCommercial ShareAlike&quot;
 }
 </code></pre>
-
 <p><strong>Fediverse Integration</strong>
 Display in footers of posts as:</p>
-<pre class="codehilite"><code class="language-text">ED:AI2:SpGr:CC-BY
+<pre><code class="language-text">ED:AI2:SpGr:CC-BY
 </code></pre>
-
 <p>Parsed by clients into readable tooltip or metadata badge.</p>
 <hr />
-<h2 id="roadmap">Roadmap</h2>
+<h2>Roadmap</h2>
 <ul>
 <li>[x] Python reference parser and generator</li>
 <li>[x] JavaScript WebComponent for rendering badges</li>
@@ -204,7 +201,7 @@ Display in footers of posts as:</p>
 <li>[ ] microsite validator and live badge generator</li>
 </ul>
 <hr />
-<h2 id="community">Community</h2>
+<h2>Community</h2>
 <p>EDMeta is a community-driven initiative. We welcome contributions, feedback, and discussions on GitHub.
 Join us in shaping the future of editorial metadata!</p>
 <ul>
@@ -212,11 +209,11 @@ Join us in shaping the future of editorial metadata!</p>
 <li><a href="https://github.com/EditorialMetadata/EDMeta/issues">GitHub Issues</a></li>
 <li><a href="https://github.com/EditorialMetadata/EDMeta">GitHub Repository</a></li>
 </ul>
-<h2 id="contributing">Contributing</h2>
-<p>We welcome contributions to EDMeta! Whether you're a developer, designer, or just passionate about editorial metadata, your input is valuable. Please check our <a href="https://github.com/EditorialMetadata/EDMeta/blob/main/CONTRIBUTING.md">contributing guidelines</a> for more information on how to get involved.</p>
-<h2 id="acknowledgments">Acknowledgments</h2>
+<h2>Contributing</h2>
+<p>We welcome contributions to EDMeta! Whether you&rsquo;re a developer, designer, or just passionate about editorial metadata, your input is valuable. Please check our <a href="https://github.com/EditorialMetadata/EDMeta/blob/main/CONTRIBUTING.md">contributing guidelines</a> for more information on how to get involved.</p>
+<h2>Acknowledgments</h2>
 <p>EDMeta is inspired by the need for transparency in content creation and editorial processes. We acknowledge the contributions of the open-source community and the importance of collaboration in shaping this specification.</p>
-<h2 id="future-directions">Future Directions</h2>
+<h2>Future Directions</h2>
 <ul>
 <li><strong>Domain-Specific Extensions</strong>: Encourage the community to propose and develop domain-specific codes for various industries (e.g., journalism, academia, etc.).</li>
 <li><strong>Integration with Existing Standards</strong>: Explore alignment with existing metadata standards and frameworks to enhance interoperability.</li>
@@ -224,13 +221,14 @@ Join us in shaping the future of editorial metadata!</p>
 <li><strong>Community Engagement</strong>: Foster a vibrant community around EDMeta, encouraging discussions, feedback, and contributions to the specification.</li>
 <li><strong>Educational Resources</strong>: Create documentation, tutorials, and examples to help users understand and implement EDMeta effectively.</li>
 </ul>
-<h2 id="contact">Contact</h2>
+<h2>Contact</h2>
 <p>For inquiries, feedback, or collaboration opportunities, please reach out to us via our <a href="https://github.com/EditorialMetadata/EDMeta/discussions">GitHub Discussions</a> or <a href="https://github.com/EditorialMetadata/EDMeta/issues">GitHub Issues</a>.</p>
-<h2 id="licensing-governance">Licensing &amp; Governance</h2>
+<h2>Licensing &amp; Governance</h2>
 <p>EDMeta is designed for open adoption. Proposals for new codes should be submitted via GitHub discussions or governance body (TBD).</p>
 <blockquote>
 <p><em>“Clarity is the new trust.”</em></p>
 </blockquote>
+<!-- Content End -->
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
