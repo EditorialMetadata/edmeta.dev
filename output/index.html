@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Page with Light/Dark Mode</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="bg-light py-3 mb-4 text-dark d-flex justify-content-between align-items-center">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h1>My Bootstrap Page</h1>
+            <button id="header-mode-toggle" class="btn btn-secondary">Toggle Light/Dark Mode</button>
+        </div>
+    </header>
+    <div class="container">
+        <h1>EDMeta: Editorial Metadata Shortform Specification</h1>
+<h2>Summary</h2>
+<p>EDMeta is a compact, machine- and human-readable string format for denoting authorship origin, editorial checks, and licensing on written or media content. It aims to improve transparency, support ethical content sourcing, and enable automated processing or filtering in both human-facing and federated systems.</p>
+<h2>Goals</h2>
+<ul>
+<li><strong>Transparency</strong>: Show clearly how a piece of content was created, verified, and licensed.</li>
+<li><strong>Compactness</strong>: Fit easily in signatures, footers, posts, and metadata headers.</li>
+<li><strong>Interoperability</strong>: Be parseable into structured formats (e.g., JSON-LD, ActivityStreams).</li>
+<li><strong>Extensibility</strong>: Allow for future categories or domain-specific extensions.</li>
+</ul>
+<hr />
+<h2>Syntax</h2>
+<p><code>text
+ED:&lt;origin&gt;:&lt;checks&gt;:&lt;license&gt;</code></p>
+<p>All segments use shortcodes for compact representation.</p>
+<h3>Origin</h3>
+<p>Describes the creation process:</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>H</code></td>
+<td>Human-authored</td>
+</tr>
+<tr>
+<td><code>AI0</code></td>
+<td>Pure AI-generated</td>
+</tr>
+<tr>
+<td><code>AI1</code></td>
+<td>AI-generated, lightly edited</td>
+</tr>
+<tr>
+<td><code>AI2</code></td>
+<td>Human-led, AI-assisted</td>
+</tr>
+<tr>
+<td><code>AI3</code></td>
+<td>AI-generated, heavily curated</td>
+</tr>
+<tr>
+<td><code>+H-ED</code></td>
+<td>Human-edited (can be appended to AI)</td>
+</tr>
+</tbody>
+</table>
+<p>Examples:</p>
+<ul>
+<li><code>H</code> → human-authored</li>
+<li><code>AI2</code> → human-led, AI-assisted</li>
+<li><code>AI0+H-ED</code> → AI-generated, then human-edited</li>
+</ul>
+<h3>Checks</h3>
+<p>Editorial and quality checks applied, expressed as 2-letter codes:</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Sp</code></td>
+<td>Spell-checked</td>
+</tr>
+<tr>
+<td><code>Gr</code></td>
+<td>Grammar-checked</td>
+</tr>
+<tr>
+<td><code>St</code></td>
+<td>Style-checked</td>
+</tr>
+<tr>
+<td><code>Ft</code></td>
+<td>Fact-checked</td>
+</tr>
+<tr>
+<td><code>Ct</code></td>
+<td>Sources cited</td>
+</tr>
+<tr>
+<td><code>Md</code></td>
+<td>Moderated</td>
+</tr>
+<tr>
+<td><code>Pr</code></td>
+<td>Peer-reviewed</td>
+</tr>
+<tr>
+<td><code>Bs</code></td>
+<td>Bias-reviewed</td>
+</tr>
+<tr>
+<td><code>Au</code></td>
+<td>Author identity verified</td>
+</tr>
+</tbody>
+</table>
+<p>Concatenate without separators:</p>
+<ul>
+<li><code>SpGrStFt</code> = spell, grammar, style, fact checks</li>
+</ul>
+<h3>License</h3>
+<p>Use established short forms:</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>License Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CC-BY</code></td>
+<td>Creative Commons Attribution</td>
+</tr>
+<tr>
+<td><code>CC-NC</code></td>
+<td>CC Attribution NonCommercial</td>
+</tr>
+<tr>
+<td><code>CC-NC-SA</code></td>
+<td>CC Attribution NonCommercial ShareAlike</td>
+</tr>
+<tr>
+<td><code>ARR</code></td>
+<td>All Rights Reserved</td>
+</tr>
+<tr>
+<td><code>PD</code></td>
+<td>Public Domain</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Examples</h2>
+<p><code>text
+ED:H:SpStFt:CC-BY</code></p>
+<blockquote>
+<p>Human-authored, spell/style/fact-checked, Creative Commons Attribution</p>
+</blockquote>
+<p><code>text
+ED:AI0+H-ED:GrCtMd:CC-NC-SA</code></p>
+<blockquote>
+<p>AI-generated, human-edited, grammar/citation/moderation checked, Creative Commons NonCommercial ShareAlike</p>
+</blockquote>
+<hr />
+<h2>Expanded Use</h2>
+<ul>
+<li><strong>JSON-LD Mapping</strong></li>
+</ul>
+<p>For structured data, map to JSON-LD:</p>
+<p>```json
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "authoringOrigin": "human-authored",
+    "editorialChecks": ["spell-checked", "style-checked", "fact-checked"],
+    "license": "CC Attribution"
+  }</p>
+<p><code>json
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "authoringOrigin": "ai-generated+human-edited",
+    "editorialChecks": ["grammar-checked", "sources cited", "moderated"],
+    "license": "CC Attribution NonCommercial ShareAlike"
+  }</code></p>
+<ul>
+<li><strong>Fediverse Integration</strong>
+  Display in footers of posts as:</li>
+</ul>
+<p><code>text
+  ED:AI2:SpGr:CC-BY</code></p>
+<p>Parsed by clients into readable tooltip or metadata badge.</p>
+<hr />
+<h2>Roadmap</h2>
+<ul>
+<li>[x] Python reference parser and generator</li>
+<li>[x] JavaScript WebComponent for rendering badges</li>
+<li>[x] <code>edmeta.dev</code> microsite</li>
+<li>[ ] Registry of community/industry extensions</li>
+<li>[ ] ActivityStreams/AS2 vocabulary alignment</li>
+<li>[ ] microsite validator and live badge generator</li>
+</ul>
+<hr />
+<h2>Community</h2>
+<p>EDMeta is a community-driven initiative. We welcome contributions, feedback, and discussions on GitHub.
+Join us in shaping the future of editorial metadata!</p>
+<ul>
+<li><a href="https://github.com/EditorialMetadata/EDMeta/discussions">GitHub Discussions</a></li>
+<li><a href="https://github.com/EditorialMetadata/EDMeta/issues">GitHub Issues</a></li>
+<li><a href="https://github.com/EditorialMetadata/EDMeta">GitHub Repository</a></li>
+</ul>
+<h2>Contributing</h2>
+<p>We welcome contributions to EDMeta! Whether you're a developer, designer, or just passionate about editorial metadata, your input is valuable. Please check our <a href="https://github.com/EditorialMetadata/EDMeta/blob/main/CONTRIBUTING.md">contributing guidelines</a> for more information on how to get involved.</p>
+<h2>Acknowledgments</h2>
+<p>EDMeta is inspired by the need for transparency in content creation and editorial processes. We acknowledge the contributions of the open-source community and the importance of collaboration in shaping this specification.</p>
+<h2>Future Directions</h2>
+<ul>
+<li><strong>Domain-Specific Extensions</strong>: Encourage the community to propose and develop domain-specific codes for various industries (e.g., journalism, academia, etc.).</li>
+<li><strong>Integration with Existing Standards</strong>: Explore alignment with existing metadata standards and frameworks to enhance interoperability.</li>
+<li><strong>Tooling and Libraries</strong>: Develop libraries and tools in various programming languages to facilitate the adoption of EDMeta in different environments.</li>
+<li><strong>Community Engagement</strong>: Foster a vibrant community around EDMeta, encouraging discussions, feedback, and contributions to the specification.</li>
+<li><strong>Educational Resources</strong>: Create documentation, tutorials, and examples to help users understand and implement EDMeta effectively.</li>
+</ul>
+<h2>Contact</h2>
+<p>For inquiries, feedback, or collaboration opportunities, please reach out to us via our <a href="https://github.com/EditorialMetadata/EDMeta/discussions">GitHub Discussions</a> or <a href="https://github.com/EditorialMetadata/EDMeta/issues">GitHub Issues</a>.</p>
+<h2>Licensing &amp; Governance</h2>
+<p>EDMeta is designed for open adoption. Proposals for new codes should be submitted via GitHub discussions or governance body (TBD).</p>
+<blockquote>
+<p><em>“Clarity is the new trust.”</em></p>
+</blockquote>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
