@@ -19,6 +19,11 @@ def render_markdown_to_html(markdown_files, template_path, output_path):
         with open(markdown_filepath, 'r') as f:
             markdown_content = f.read()
 
+        # Remove the front matter if present
+        if markdown_content.startswith('---'):
+            end_of_front_matter = markdown_content.find('---', 3) + 3
+            markdown_content = markdown_content[end_of_front_matter:].strip()
+
         # Enable common markdown extensions including tables and fenced code blocks
         html_content = markdown.markdown(markdown_content, extensions=['tables', 'fenced_code', 'codehilite', 'toc'])
 
