@@ -19,8 +19,8 @@ def render_markdown_to_html(markdown_files, template_path, output_path):
         with open(markdown_filepath, 'r') as f:
             markdown_content = f.read()
 
-        # Enable table rendering in markdown
-        html_content = markdown.markdown(markdown_content, extensions=['tables'])
+        # Enable common markdown extensions including tables and fenced code blocks
+        html_content = markdown.markdown(markdown_content, extensions=['tables', 'fenced_code', 'codehilite', 'toc'])
 
         # Render the HTML content using the Jinja template
         rendered_html = template.render(content=html_content)
